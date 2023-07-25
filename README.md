@@ -21,9 +21,10 @@ The API was developed for my [Youtube Tutorial](https://www.youtube.com/watch?v=
 
 ## Installation
 
-#DOCKER LOCALHOST CONECTION
+## DOCKER LOCALHOST CONECTION
 spring.datasource.url=jdbc:postgresql://localhost:5432/product
-#DOCKER IMAGE CONECTION
+
+## DOCKER IMAGE CONECTION
 spring.datasource.url=jdbc:postgresql://db:5432/product
 
 1. Clone the repository:
@@ -33,7 +34,7 @@ spring.datasource.url=jdbc:postgresql://db:5432/product
 3. Install [PostgresSQL](https://www.postgresql.org/)
 
 
-#RUN ON DOCKER
+## RUN ON DOCKER
 
 1.docker-compose up --build
 
