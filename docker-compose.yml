@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: product
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  flyway:
+    image: boxfuse/flyway:latest
+    depends_on:
+      - db
+    command: ["sh", "./wait-for-it.sh", "db:5432", "--", "flyway", "-url=jdbc:postgresql://db:5432/product", "-user=postgres", "-password=password", "migrate"]
+    volumes:
+      - ./src/main/resources/db/migration:/flyway/sql
+      - ./wait-for-it.sh:/wait-for-it.sh
+    entrypoint: /bin/sh
+
+  auth:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - flyway
+    ports:
+      - 8080:8080
