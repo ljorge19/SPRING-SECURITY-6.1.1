@@ -22,7 +22,10 @@ The API was developed to demonstrate how to configure Authenticatio and Authoriz
 ## Installation
 
 ## LOCALHOST CONECTION
-jdbc:postgresql://localhost:5432/product
+-Dspring.profiles.active=build
+
+## LOCALHOST BUILD
+clean package -Dspring.profiles.active=local
 
 1. Clone the repository:
 
