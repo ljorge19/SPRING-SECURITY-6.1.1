@@ -22,7 +22,7 @@ The API was developed to demonstrate how to configure Authenticatio and Authoriz
 ## Installation
 
 ## LOCALHOST CONECTION
-spring.datasource.url=jdbc:postgresql://localhost:5432/product
+jdbc:postgresql://localhost:5432/product
 
 1. Clone the repository:
 
