@@ -41,9 +41,9 @@ spring.datasource.url=jdbc:postgresql://db:5432/product
 
 ## RUN ON DOCKER
 
-1.docker-compose up --build
+1.docker-compose up --build(vai gerar as imagens e preparar os arquivos necessários para subir o banco).
 
-2.docker-compose up
+2.docker-compose up(vai subir a aplicação e o banco).
 
 ## END DOCKER 
 docker-compose down
