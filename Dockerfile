@@ -1,10 +1,21 @@
-FROM eclipse-temurin:17-jdk
+# Etapa 1: Build com Maven (imagem com Maven + JDK 17)
+FROM maven:3.9.4-eclipse-temurin-17 AS build
 
-# Atualiza pacotes e instala o cliente psql
-RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-COPY target/auth-0.0.1-SNAPSHOT.jar /app/app.jar
-COPY wait-for-it.sh /app/wait-for-it.sh
-RUN chmod +x /app/wait-for-it.sh
+COPY pom.xml .
+COPY src ./src
 
-ENTRYPOINT ["/app/wait-for-it.sh", "db:5432", "--", "java", "-jar", "/app/app.jar"]
+RUN mvn clean package -DskipTests
+
+# Etapa 2: Imagem final enxuta com JRE
+FROM openjdk:17-jdk-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+COPY entrypoint.sh .
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["sh", "./entrypoint.sh"]

@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-# Espera até que o Postgres esteja pronto antes de executar o comando principal
-/app/wait-for-it.sh db:5432 -- java -jar /app/app.jar
+SLEEP=1500
+echo "Esperando $SLEEP segundos para o banco iniciar..."
+sleep $SLEEP
+
+echo "Iniciando a aplicação..."
+java -Djava.security.egd=file:/dev/./urandom -jar /app/app.jar

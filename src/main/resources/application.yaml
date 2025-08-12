@@ -1,7 +1,3 @@
-#DOCKER LOCALHOST CONECTION
-#spring.datasource.url=jdbc:postgresql://localhost:5432/product
-#DOCKER IMAGE CONECTION
-##spring.datasource.url=jdbc:postgresql://db:5432/product
 spring:
   datasource:
     url: jdbc:postgresql://db:5432/product
